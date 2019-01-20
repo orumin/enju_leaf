@@ -6,7 +6,7 @@ cp .env.production.sample .env.production
 
 echo SECRET_KEY_BASE=`docker-compose run --rm web bundle exec rake secret` >> .env.production
 
-id=`docker create orumin/enju_leaf:1.2.2-fullmod`
+id=`docker create orumin/enju_leaf:1.3.1-fullmod`
 sudo docker cp $id:/enju_leaf/db/migrate .
 docker cp $id:/enju_leaf/private/system .
 docker rm -v $id

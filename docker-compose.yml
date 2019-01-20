@@ -23,10 +23,10 @@ services:
 
   web:
     build: .
-    image: orumin/enju_leaf:1.2.2-fullmod
+    image: orumin/enju_leaf:1.3.1-fullmod
     restart: always
     env_file: .env.production
-    command: sh -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -b 0.0.0.0 -p 3000"
+    command: sh -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -e production -p 3000"
     volumes:
       - ./assets:/enju_leaf/public/assets
       - ./system:/enju_leaf/private/system
@@ -42,7 +42,7 @@ services:
 
   solr:
     build: .
-    image: orumin/enju_leaf:1.2.2-fullmod
+    image: orumin/enju_leaf:1.3.1-fullmod
     restart: always
     env_file: .env.production
     command: bundle exec rake sunspot:solr:run
@@ -54,10 +54,10 @@ services:
 
   resque:
     build: .
-    image: orumin/enju_leaf:1.2.2-fullmod
+    image: orumin/enju_leaf:1.3.1-fullmod
     restart: always
     env_file: .env.production
-    command: bundle exec rake environment resque:work QUEUE=enju_leaf TEAM_CHILD=1
+    command: bundle exec rake environment resque:work QUEUE=mailers,enju_leaf TEAM_CHILD=1
     volumes:
       - ./system:/enju_leaf/private/system
     networks:

@@ -41,7 +41,7 @@ echo SECRET_KEY_BASE=`docker-compose run --rm web bundle exec rake secret` >> .e
 ### デフォルトのカバー画像・書誌形態画像，マイグレーションファイルの保存
 
 ```sh
-id=`docker create orumin/enju_leaf:1.2.2-fullmod`
+id=`docker create orumin/enju_leaf:1.3.1-fullmod`
 docker cp $id:/enju_leaf/db/migrate .
 docker cp $id:/enju_leaf/private/system .
 docker rm -v $id
@@ -89,7 +89,7 @@ sleep 30 && docker-compose exec solr bundle exec rake environment sunspot:reinde
 ### ログイン
 
 初期設定ではユーザー名 `enjuadmin` パスワード `adminpassword` でログインできます。
-以降のシステム設定や OPAC 運用方法などは [公式マニュアル](https://next-l.github.io/manual/1.2/) をご覧ください。
+以降のシステム設定や OPAC 運用方法などは [公式マニュアル](https://next-l.github.io/manual/1.3/) をご覧ください。
 
 ## 毎回の起動方法と終了方法
 

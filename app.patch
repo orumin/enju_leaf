@@ -1,24 +1,27 @@
---- app.orig/controllers/application_controller.rb
-+++ app/controllers/application_controller.rb
-@@ -10,4 +10,5 @@
-   # Prevent CSRF attacks by raising an exception.
-   # For APIs, you may want to use :null_session instead.
-   protect_from_forgery with: :exception
+diff -Nur app.orig/controllers/application_controller.rb app/controllers/application_controller.rb
+--- app.orig/controllers/application_controller.rb	2019-01-21 11:17:42.617511594 +0900
++++ app/controllers/application_controller.rb	2019-01-21 11:18:06.422069752 +0900
+@@ -8,4 +8,5 @@
+   before_action :set_paper_trail_whodunnit
+   after_action :verify_authorized, unless: :devise_controller?
+   protect_from_forgery with: :exception, prepend: true
 +  include EnjuPurchaseRequest::Controller
  end
---- app.orig/helpers/application_helper.rb
-+++ app/helpers/application_helper.rb
+diff -Nur app.orig/helpers/application_helper.rb app/helpers/application_helper.rb
+--- app.orig/helpers/application_helper.rb	2019-01-21 11:17:42.617511594 +0900
++++ app/helpers/application_helper.rb	2019-01-21 11:18:19.801383465 +0900
 @@ -5,4 +5,5 @@
+     include EnjuManifestationViewer::ApplicationHelper
      include EnjuManifestationViewer::BookJacketHelper
-     include EnjuManifestationViewer::ManifestationViewerHelper
    end
 +  include EnjuBookmark::BookmarkHelper
  end
---- app.orig/models/user.rb
-+++ app/models/user.rb
+diff -Nur app.orig/models/user.rb app/models/user.rb
+--- app.orig/models/user.rb	2019-01-21 11:17:42.618511617 +0900
++++ app/models/user.rb	2019-01-21 11:18:30.651637875 +0900
 @@ -9,3 +9,5 @@
    include EnjuSeed::EnjuUser
 +  include EnjuPurchaseRequest::EnjuUser
 +  include EnjuBookmark::EnjuUser
-
+ 
  end
