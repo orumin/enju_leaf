@@ -1,0 +1,11 @@
+postgres/
+system/
+assets/
+migrate/
+redis/
+.env
+.env.production
+.DS_Store
+*~
+*.swp
+docker-compose.override.yml

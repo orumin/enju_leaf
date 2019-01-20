@@ -1,0 +1,7 @@
+.env
+.env.*
+.DS_Store
+*.swp
+*~
+postgres
+redis
