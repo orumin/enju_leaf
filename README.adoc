@@ -8,7 +8,7 @@
 
 == はじめに
 
-移行の説明は，次のコマンド
+以降の説明は，次のコマンド
 
 ```sh
 git clone https://github.com/orumin/enju_leaf.git
