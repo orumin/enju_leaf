@@ -1,4 +1,4 @@
 #!/bin/sh
 
 docker-compose up -d
-docker-compose exec bundle exec rake sunspot:reindex
+sleep 30 && docker-compose exec web bundle exec rake environment sunspot:reindex

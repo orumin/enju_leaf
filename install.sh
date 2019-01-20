@@ -32,4 +32,4 @@ docker-compose run --rm web bundle exec rake enju_leaf:upgrade
 docker-compose run --rm web bundle exec rake enju_leaf:load_asset_files
 
 docker-compose up -d
-sleep 30 && docker-compose exec web bundle exec rake sunspot:reindex
+sleep 30 && docker-compose exec web bundle exec rake environment sunspot:reindex
