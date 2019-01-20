@@ -1,0 +1,24 @@
+--- app.orig/controllers/application_controller.rb
++++ app/controllers/application_controller.rb
+@@ -10,4 +10,5 @@
+   # Prevent CSRF attacks by raising an exception.
+   # For APIs, you may want to use :null_session instead.
+   protect_from_forgery with: :exception
++  include EnjuPurchaseRequest::Controller
+ end
+--- app.orig/helpers/application_helper.rb
++++ app/helpers/application_helper.rb
+@@ -5,4 +5,5 @@
+     include EnjuManifestationViewer::BookJacketHelper
+     include EnjuManifestationViewer::ManifestationViewerHelper
+   end
++  include EnjuBookmark::BookmarkHelper
+ end
+--- app.orig/models/user.rb
++++ app/models/user.rb
+@@ -9,3 +9,5 @@
+   include EnjuSeed::EnjuUser
++  include EnjuPurchaseRequest::EnjuUser
++  include EnjuBookmark::EnjuUser
+
+ end
