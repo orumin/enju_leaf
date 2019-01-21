@@ -131,11 +131,10 @@ docker-compose run --rm web bundle exec rake db:migrate
 docker-compose run --rm web bundle exec rake enju_leaf:upgrade
 ```
 
-### アセットのプリコンパイル，ロード
+### アセットのプリコンパイル
 
 ```sh
 docker-compose run --rm web bundle exec rake assets:precompile
-docker-compose run --rm web bundle exec rake enju_leaf:load_asset_files
 ```
 
 ### システムを停止と再起動
