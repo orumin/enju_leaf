@@ -55,6 +55,8 @@ RUN apk add --no-cache --virtual .build-deps \
  && bundle config --local path vendor/bundle \
  && bundle config --local without test:development:doc \
  && bundle install -j$(getconf _NPROCESSORS_ONLN) \
+ && rm -rf /enju_leaf/vendor/bundle/ruby/2.4.0/cache \
+ && rm -rf /root/.bundle/cache \
  && apk del --purge .build-deps
 
 WORKDIR /enju_leaf
