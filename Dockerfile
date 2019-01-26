@@ -12,7 +12,8 @@ ENV DB_PASS admin
 ENV DB_NAME enju_leaf_production
 ENV DB_HOST db
 ENV RAILS_SERVE_STATIC_FILES true
-ENV REDIS_URL redis://127.0.0.1/enju_leaf
+ENV REDIS_URL redis://redis/enju_leaf
+ENV SOLR_URL  http://solr:8983/solr/default
 ENV RAILS_ENV production
 
 EXPOSE 3000
@@ -85,11 +86,7 @@ USER ${DB_USER}
 
 RUN whenever --update-crontab
 
-RUN echo 'redis: redis-server' > Procfile \
- && echo 'solr: bundle exec rake sunspot:solr:run' >> Procfile \
- && echo 'resque: bundle exec rake resque:work QUEUE=enju_leaf,mailers TEAM_CHILD=1' >> Procfile \
- && echo 'web: bundle exec rails s -b 0.0.0.0 -p 3000' >> Procfile
-
-COPY database.yml config/
+COPY resque.rb config/initializers/
+COPY database.yml resque.yml sunspot.yml config/
 
 ENTRYPOINT ["/sbin/tini", "--"]

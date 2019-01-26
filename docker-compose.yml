@@ -11,23 +11,22 @@ services:
     volumes:
       - ./postgres:/var/lib/postgresql/data
 
-#  redis:
-#    restart: always
-#    image: redis:4.0-alpine
-#    networks:
-#      - internal_network
-#    healthcheck:
-#      test: ["CMD", "redis-cli", "ping"]
-#    volumes:
-#      - ./redis:/data
+  redis:
+    restart: always
+    image: redis:4.0-alpine
+    networks:
+      - internal_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+    volumes:
+      - ./redis:/data
 
   web:
     build: .
     image: orumin/enju_leaf:1.2.2
     restart: always
     env_file: .env.production
-#    command: sh -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -e production -p 3000"
-    command: foreman start
+    command: sh -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -b 0.0.0.0 -p 3000"
     volumes:
       - ./assets:/enju_leaf/public/assets
       - ./system:/enju_leaf/private/system
@@ -39,33 +38,33 @@ services:
       - "3000:3000"
     depends_on:
       - db
-#      - redis
+      - redis
 
-#  solr:
-#    build: .
-#    image: orumin/enju_leaf:1.2.2
-#    restart: always
-#    env_file: .env.production
-#    command: bundle exec rake sunspot:solr:run
-#    networks:
-#      - external_network
-#      - internal_network
-#    depends_on:
-#      - db
-#      - redis
-#
-#  resque:
-#    build: .
-#    image: orumin/enju_leaf:1.2.2
-#    restart: always
-#    env_file: .env.production
-#    command: bundle exec rake environment resque:work QUEUE=mailers,enju_leaf TEAM_CHILD=1
-#    networks:
-#      - external_network
-#      - internal_network
-#    depends_on:
-#      - db
-#      - redis
+  solr:
+    build: .
+    image: orumin/enju_leaf:1.2.2
+    restart: always
+    env_file: .env.production
+    command: bundle exec rake sunspot:solr:run
+    networks:
+      - internal_network
+    depends_on:
+      - db
+      - redis
+
+  resque:
+    build: .
+    image: orumin/enju_leaf:1.2.2
+    restart: always
+    env_file: .env.production
+    command: bundle exec rake environment resque:work QUEUE=enju_leaf TEAM_CHILD=1
+    volumes:
+      - ./system:/enju_leaf/private/system
+    networks:
+      - internal_network
+    depends_on:
+      - db
+      - redis
 
 networks:
   external_network:

@@ -83,7 +83,7 @@ docker-compose run --rm web bundle exec rake enju_leaf:load_asset_files
 
 ```sh
 docker-compose up -d
-sleep 30 && docker-compose exec web bundle exec rake environment sunspot:reindex
+sleep 30 && docker-compose exec solr bundle exec rake environment sunspot:reindex
 ```
 
 ### ログイン
@@ -97,7 +97,7 @@ sleep 30 && docker-compose exec web bundle exec rake environment sunspot:reindex
 
 ```sh
 docker-compose up -d
-sleep 30 && docker-compose exec web bundle exec rake environment sunspot:reindex
+sleep 30 && docker-compose exec solr bundle exec rake environment sunspot:reindex
 ```
 
 ### 終了
@@ -141,7 +141,7 @@ docker-compose run --rm web bundle exec rake assets:precompile
 
 ```sh
 docker-compose stop && docker-compose up -d
-sleep 30 && docker-compose exec web bundle exec rake sunspot:reindex
+sleep 30 && docker-compose exec solr bundle exec rake environment sunspot:reindex
 ```
 
 ## バックアップと他マシンでの起動
@@ -165,7 +165,7 @@ sudo chown 991:991 -R ./system ./assets ./migrate # .env.production の UID と 
 
 ```sh
 docker-compose up -d
-sleep 30 && docker-compose exec web bundle exec rake environment sunspot:reindex
+sleep 30 && docker-compose exec sorl bundle exec rake environment sunspot:reindex
 ```
 
 ## .env.production について
