@@ -53,7 +53,7 @@ sudo chown 991:991 -R ./system ./migrate # .env.production の UID と GID の�
 
 ```sh
 export DB_USER=enju_leaf DB_NAME=enju_leaf_production DB_PASS=admin # .env.production に合わせる
-docker-compose up -d db
+docker-compose up -d db \
   && sleep 10 \
   && docker-compose exec -u postgres db sh -c "echo create user ${DB_USER} with password \'${DB_PASS}\' createdb\; | psql -f -" \
   && docker-compose exec -u postgres db createdb -U ${DB_USER} ${DB_NAME}
