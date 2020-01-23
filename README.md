@@ -41,7 +41,7 @@ echo SECRET_KEY_BASE=`docker-compose run --rm web bundle exec rake secret` >> .e
 ### デフォルトのカバー画像・書誌形態画像，マイグレーションファイルの保存
 
 ```sh
-id=`docker create orumin/enju_leaf:1.3.1`
+id=`docker create orumin/enju_leaf:1.3.2`
 docker cp $id:/enju_leaf/db/migrate .
 docker cp $id:/enju_leaf/private/system .
 docker rm -v $id

@@ -48,10 +48,10 @@ RUN apk add --no-cache --virtual .build-deps \
  && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn \
  && ln -s /opt/yarn/bin/yarnpkg /usr/local/bin/yarnpkg \
  && gem install bundler -v=1.17.2 \
- && gem install rails -v=5.1.6 \
+ && gem install rails -v=5.2.3 \
  && gem install foreman whenever \
- && rails _5.1.6_ new enju_leaf -d postgresql --skip-bundle --skip-turbolinks \
-    -m https://gist.github.com/nabeta/6c56f0edf5cc1c80d9c655c2660a9c59.txt \
+ && rails _5.2.3_ new enju_leaf -d postgresql --skip-bundle --skip-turbolinks \
+    -m https://raw.githubusercontent.com/orumin/enju_leaf_template/1.3.2/enju_leaf_13_template.rb \
  && cd enju_leaf \
  && bundle config --local path vendor/bundle \
  && bundle config --local without test:development:doc \
