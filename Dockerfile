@@ -1,4 +1,4 @@
-FROM orumin/enju_leaf:1.3.1
+FROM orumin/enju_leaf:1.3.2
 
 LABEL maintainer="https://github.com/orumin/enju_leaf_docker"
 
@@ -17,16 +17,14 @@ RUN echo "" >> Gemfile \
  && echo "gem 'enju_nii', '~> 0.3.0'" >> Gemfile \
  && echo "gem 'enju_loc', '~> 0.3.0'" >> Gemfile \
  && echo "gem 'enju_oai', '~> 0.3.0'" >> Gemfile \
- && echo "gem 'enju_purchase_request', '~> 0.3.0.beta.beta.1'" >> Gemfile \
- && echo "gem 'enju_bookmark', '~> 0.3.0'" >> Gemfile
+ && echo "gem 'enju_purchase_request', '~> 0.3.1'" >> Gemfile \
+ && echo "gem 'enju_bookmark', '~> 0.3.1'" >> Gemfile
 
 RUN bundle update \
  && rm -rf /enju_leaf/vendor/bundle/ruby/2.6.0/cache
 
-COPY app.patch .
-RUN patch -p0 < app.patch
-RUN echo 'Manifestation.include(EnjuOai::OaiModel)' >> app/models/user.rb
-RUN sed -i -e 's/\(\*\.png\)/\1 *.gif/' config/initializers/assets.rb
+COPY modules.patch .
+RUN patch -p1 < modules.patch
 
 RUN bundle exec rake enju_purchase_request_engine:install:migrations
 RUN bundle exec rake enju_bookmark_engine:install:migrations

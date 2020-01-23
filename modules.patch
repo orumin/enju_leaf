@@ -1,0 +1,46 @@
+diff -Nur enju_leaf.orig/app/controllers/application_controller.rb enju_leaf/app/controllers/application_controller.rb
+--- enju_leaf.orig/app/controllers/application_controller.rb	2020-01-24 01:10:51.000000000 +0900
++++ enju_leaf/app/controllers/application_controller.rb	2020-01-24 01:41:16.618094476 +0900
+@@ -4,6 +4,7 @@
+   include EnjuSubject::Controller
+   include EnjuEvent::Controller
+   include EnjuBiblio::Controller
++  include EnjuPurchaseRequest::Controller
+ 
+   include Pundit
+   before_action :set_paper_trail_whodunnit
+diff -Nur enju_leaf.orig/app/helpers/application_helper.rb enju_leaf/app/helpers/application_helper.rb
+--- enju_leaf.orig/app/helpers/application_helper.rb	2020-01-24 01:09:59.000000000 +0900
++++ enju_leaf/app/helpers/application_helper.rb	2020-01-24 01:41:54.483888321 +0900
+@@ -5,4 +5,5 @@
+     include EnjuManifestationViewer::ApplicationHelper
+     include EnjuManifestationViewer::BookJacketHelper
+   end
++  include EnjuBookmark::BookmarkHelper
+ end
+diff -Nur enju_leaf.orig/app/models/user.rb enju_leaf/app/models/user.rb
+--- enju_leaf.orig/app/models/user.rb	2020-01-24 01:10:51.000000000 +0900
++++ enju_leaf/app/models/user.rb	2020-01-24 01:45:00.735746754 +0900
+@@ -7,6 +7,8 @@
+          :recoverable, :rememberable, # :validatable,
+       :lockable, lock_strategy: :none, unlock_strategy: :none
+   include EnjuSeed::EnjuUser
++  include EnjuPurchaseRequest::EnjuUser
++  include EnjuBookmark::EnjuUser
+ 
+ end
+ Item.include(EnjuLibrary::EnjuItem)
+@@ -19,3 +21,4 @@
+ UserGroup.include(EnjuCirculation::EnjuUserGroup)
+ Withdraw.include(EnjuCirculation::EnjuWithdraw)
+ Manifestation.include(EnjuSubject::EnjuManifestation)
++Manifestation.include(EnjuOai::OaiModel)
+diff -Nur enju_leaf.orig/config/initializers/assets.rb enju_leaf/config/initializers/assets.rb
+--- enju_leaf.orig/config/initializers/assets.rb	2020-01-24 01:09:31.000000000 +0900
++++ enju_leaf/config/initializers/assets.rb	2020-01-24 01:44:43.585394271 +0900
+@@ -12,4 +12,4 @@
+ # application.js, application.css, and all non-JS/CSS in the app/assets
+ # folder are already added.
+ # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+-Rails.application.config.assets.precompile += %w( *.png )
++Rails.application.config.assets.precompile += %w( *.png *.gif )
