@@ -51,7 +51,7 @@ RUN apk add --no-cache --virtual .build-deps \
  && gem install rails -v=5.2.3 \
  && gem install foreman whenever \
  && rails _5.2.3_ new enju_leaf -d postgresql --skip-bundle --skip-turbolinks \
-    -m https://raw.githubusercontent.com/orumin/enju_leaf_template/1.3.2/enju_leaf_13_template.rb \
+    -m https://raw.githubusercontent.com/orumin/enju_leaf_template/1.3.3/enju_leaf_13_template.rb \
  && cd enju_leaf \
  && bundle config --local path vendor/bundle \
  && bundle config --local without test:development:doc \
@@ -84,6 +84,7 @@ RUN apk add --no-cache postgresql openrc \
  && su postgres -c "createdb -U ${DB_USER} ${DB_NAME}" \
  && su enju_leaf -c 'SECRET_KEY_BASE=placeholder bundle exec rails g enju_leaf:setup' \
  && su enju_leaf -c 'SECRET_KEY_BASE=placeholder bundle exec rails g enju_leaf:quick_install' \
+ && su enju_leaf -c 'SECRET_KEY_BASE=placeholder bundle exec rails g enju_leaf:seed' \
  && apk del --purge postgresql openrc \
  && rm -rf log tmp \
  && rm -rf /var/lib/postgresql \
