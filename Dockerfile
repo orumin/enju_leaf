@@ -94,6 +94,7 @@ USER ${DB_USER}
 
 RUN whenever --update-crontab
 
+COPY production.rb config/environments/
 COPY resque.rb config/initializers/
 COPY database.yml resque.yml sunspot.yml config/
 
