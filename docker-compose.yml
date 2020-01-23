@@ -3,7 +3,7 @@ services:
 
   db:
     restart: always
-    image: postgres:9.6-alpine
+    image: postgres:12-alpine
     networks:
       - internal_network
     healthcheck:
@@ -23,7 +23,7 @@ services:
 
   web:
     build: .
-    image: orumin/enju_leaf:1.3.2-fullmod
+    image: orumin/enju_leaf:1.3.3-fullmod
     restart: always
     env_file: .env.production
     command: sh -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -e production -p 3000"
@@ -42,7 +42,7 @@ services:
 
   solr:
     build: .
-    image: orumin/enju_leaf:1.3.2-fullmod
+    image: orumin/enju_leaf:1.3.3-fullmod
     restart: always
     env_file: .env.production
     command: bundle exec rake sunspot:solr:run
@@ -54,7 +54,7 @@ services:
 
   resque:
     build: .
-    image: orumin/enju_leaf:1.3.2-fullmod
+    image: orumin/enju_leaf:1.3.3-fullmod
     restart: always
     env_file: .env.production
     command: bundle exec rake environment resque:work QUEUE=mailers,enju_leaf TEAM_CHILD=1

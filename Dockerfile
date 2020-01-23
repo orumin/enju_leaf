@@ -1,4 +1,4 @@
-FROM orumin/enju_leaf:1.3.2
+FROM orumin/enju_leaf:1.3.3
 
 LABEL maintainer="https://github.com/orumin/enju_leaf_docker"
 
