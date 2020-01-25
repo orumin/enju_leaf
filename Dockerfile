@@ -1,5 +1,5 @@
-FROM node:8.15-alpine as node
-FROM ruby:2.6-alpine3.8
+FROM node:12-alpine as node
+FROM ruby:2.6-alpine3.11
 
 LABEL maintainer="https://github.com/orumin/enju_leaf"
 
@@ -78,7 +78,7 @@ RUN apk add --no-cache postgresql openrc \
  && touch /run/openrc/softlevel \
  && /etc/init.d/postgresql setup \
  && chown postgres:postgres /run/postgresql && chown postgres:postgres /var/lib/postgresql \
- && su postgres -c "nohup sh -c 'pg_ctl start -- --pgdata=/var/lib/postgresql/10/data'" \
+ && su postgres -c "nohup sh -c 'pg_ctl start -- --pgdata=/var/lib/postgresql/12/data'" \
  && sleep 10 \
  && su postgres -c "echo create user ${DB_USER} with password \'${DB_PASS}\' createdb\; | psql -f -" \
  && su postgres -c "createdb -U ${DB_USER} ${DB_NAME}" \
