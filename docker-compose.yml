@@ -46,6 +46,8 @@ services:
     restart: always
     env_file: .env.production
     command: bundle exec rake sunspot:solr:run
+    volumes:
+      - ./solr:/enju_leaf/solr/default/data/index
     networks:
       - internal_network
     depends_on:
