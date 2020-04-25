@@ -1,6 +1,7 @@
 # docker image for enju_leaf
 
-![](https://img.shields.io/docker/automated/orumin/enju_leaf.svg?style#flat-square)
+![](https://img.shields.io/docker/cloud/automated/orumin/enju_leaf.svg?style#flat-square)
+![](https://img.shields.io/docker/cloud/build/orumin/enju_leaf.svg?style#flat-square)
 ![](https://img.shields.io/microbadger/image-size/orumin/enju_leaf.svg?style#flat-square)
 ![](https://img.shields.io/microbadger/layers/orumin/enju_leaf.svg?style#flat-square)
 
