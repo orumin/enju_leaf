@@ -14,9 +14,11 @@ docker rm -v $id
 sudo chown 991:991 -R ./system ./migrate
 
 export DB_USER=enju_leaf DB_NAME=enju_leaf_production DB_PASS=admin
+export POSTGRES_PASSWORD=admin
 sleep 10 \
   && docker-compose exec -u postgres db sh -c "echo create user ${DB_USER} with password \'${DB_PASS}\' createdb\; | psql -f -" \
   && docker-compose exec -u postgres db createdb -U ${DB_USER} ${DB_NAME}
+export POSTGRES_PASSWORD=
 docker-compose run --rm web bundle exec rake db:migrate
 docker-compose run --rm web bundle exec rake enju_leaf:setup
 docker-compose run --rm web bundle exec rake enju_circulation:setup

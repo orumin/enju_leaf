@@ -4,6 +4,8 @@ services:
   db:
     restart: always
     image: postgres:12-alpine
+    environment:
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}"
     networks:
       - internal_network
     healthcheck:
