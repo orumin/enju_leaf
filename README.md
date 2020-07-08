@@ -60,6 +60,7 @@ docker-compose up -d db \
   && docker-compose exec -u postgres db sh -c "echo create user ${DB_USER} with password \'${DB_PASS}\' createdb\; | psql -f -" \
   && docker-compose exec -u postgres db createdb -U ${DB_USER} ${DB_NAME}
 export POSTGRES_PASSWORD= # 不要な環境変数のリセット
+docker-compose up -d solr
 docker-compose run --rm web bundle exec rake db:migrate
 docker-compose run --rm web bundle exec rake enju_leaf:setup
 docker-compose run --rm web bundle exec rake enju_circulation:setup
