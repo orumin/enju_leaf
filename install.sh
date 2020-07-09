@@ -11,11 +11,13 @@ sudo docker cp $id:/enju_leaf/db/migrate .
 docker cp $id:/enju_leaf/private/system .
 docker rm -v $id
 
-sudo chown 991:991 -R ./system ./migrate
+mkdir solr
+sudo chown 991:991 -R ./system ./migrate ./solr
 
 export DB_USER=enju_leaf DB_NAME=enju_leaf_production DB_PASS=admin
 export POSTGRES_PASSWORD=admin
-sleep 10 \
+docker-compose up -d db \
+  && sleep 10 \
   && docker-compose exec -u postgres db sh -c "echo create user ${DB_USER} with password \'${DB_PASS}\' createdb\; | psql -f -" \
   && docker-compose exec -u postgres db createdb -U ${DB_USER} ${DB_NAME}
 export POSTGRES_PASSWORD=
