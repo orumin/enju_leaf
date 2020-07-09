@@ -47,7 +47,8 @@ docker cp $id:/enju_leaf/db/migrate .
 docker cp $id:/enju_leaf/private/system .
 docker rm -v $id
 
-sudo chown 991:991 -R ./system ./migrate # .env.production の UID と GID の値に合わせる
+mkdir solr
+sudo chown 991:991 -R ./system ./migrate ./solr # .env.production の UID と GID の値に合わせる
 ```
 
 ### データベースの初期設定
