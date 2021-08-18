@@ -23,6 +23,8 @@ COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=node /usr/local/bin/npm /usr/local/bin/npm
 COPY --from=node /opt/yarn-* /opt/yarn
 
+RUN addgroup -g ${GID} ${DB_USER} && adduser -h /enju_leaf -s /bin/sh -D -G ${DB_USER} -u ${UID} ${DB_USER}
+
 RUN apk add --no-cache --virtual .build-deps \
     build-base \
     icu-dev \
@@ -66,12 +68,10 @@ RUN apk add --no-cache --virtual .build-deps \
     $(find . -type f -name '*.rb' -exec grep -H 'store_current_location' {} \; \
       | grep skip_before_action \
       | awk -F: '{print $1}') \
+ && chown -R ${UID}:${GID} /enju_leaf \
  && apk del --purge .build-deps
 
 WORKDIR /enju_leaf
-
-RUN addgroup -g ${GID} ${DB_USER} && adduser -h /enju_leaf -s /bin/sh -D -G ${DB_USER} -u ${UID} ${DB_USER} \
- && chown -R ${DB_USER}:${DB_USER} /enju_leaf
 
 RUN apk add --no-cache postgresql openrc \
  && mkdir -p /run/openrc /run/postgresql \
